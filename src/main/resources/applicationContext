@@ -9,23 +9,32 @@
 
     <context:property-placeholder location="classpath:application.properties" />
 
+    <bean id="p1" class="org.dmytrij.entity.Contact">
+        <property name="name" value="Некий Неизвестный Пользователь"/>
+        <property name="phone" value="+380111111111"/>
+
+    </bean>
+
     <bean id="contactDao" class="org.dmytrij.dao.ContactDaoImpl">
         <property name="contacts">
-            <bean class="java.util.ArrayList">
-                <constructor-arg>
-                    <bean class="org.dmytrij.entity.Contact">
-                        <property name="name" value="Некий Неизвестный пользователь"/>
-                        <property name="email" value="some.unknown@gmail.com"/>
-                        <property name="phone" value="+380111111111"/>
-                    </bean>
-                </constructor-arg>
-            </bean>
+            <list>
+                <bean class="org.dmytrij.entity.Contact">
+                    <property name="name" value="Некий Неизвестный Пользователь"/>
+                    <property name="phone" value="+380111111111"/>
+                    <property name="email" value="some.unknown@gmail.com"/>
+                </bean>
+                <bean class="org.dmytrij.entity.Contact">
+                    <property name="name" value="Еще Один Пользователь"/>
+                    <property name="phone" value="+380111111111"/>
+                    <property name="email" value="some.one@gmail.com"/>
+                </bean>
+            </list>
         </property>
     </bean>
 
     <bean id="contactService" class="org.dmytrij.service.ContactServiceImpl" >
         <property name="contactDao" ref="contactDao" />
-        <property name="macContactsCount" value="${maxContactsCount}"/>
+        <property name="maxContactsCount" value="${maxContactsCount}"/>
     </bean>
 
 </beans>

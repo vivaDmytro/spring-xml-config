@@ -31,4 +31,9 @@ public class ContactDaoImpl implements ContactDao {
     public List<Contact> getAllContacts() {
         return contacts;
     }
+
+    @Override
+    public void clearAll() {
+        contacts.clear();
+    }
 }
